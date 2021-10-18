@@ -75,3 +75,7 @@ rf_results = pd.DataFrame(['Random forest',rf_train_mse, rf_train_r2, rf_test_ms
 rf_results.columns = ['Method','Training MSE','Training R2','Test MSE','Test R2']
 
 print (rf_results)
+
+#Combining the Results of Linear Regression and Random Forest
+
+pd.concat([lr_results, rf_results])
