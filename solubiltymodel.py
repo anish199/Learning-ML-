@@ -52,3 +52,26 @@ plt.plot(Y_train,p(Y_train),"#F8766D")
 plt.ylabel('Predicted LogS')
 plt.xlabel('Experimental LogS')
 plt.show()
+
+#Using RandomForest
+
+from sklearn.ensemble import RandomForestRegressor
+rf = RandomForestRegressor(max_depth=2, random_state=42)
+rf.fit(X_train, Y_train)
+
+#predict
+
+Y_rf_train_pred = rf.predict(X_train)
+Y_rf_test_pred = rf.predict(X_test)
+# perfomance metrics
+
+from sklearn.metrics import mean_squared_error, r2_score
+rf_train_mse = mean_squared_error(Y_train, Y_rf_train_pred)
+rf_train_r2 = r2_score(Y_train, Y_rf_train_pred)
+rf_test_mse = mean_squared_error(Y_test, Y_rf_test_pred)
+rf_test_r2 = r2_score(Y_test, Y_rf_test_pred)
+
+rf_results = pd.DataFrame(['Random forest',rf_train_mse, rf_train_r2, rf_test_mse, rf_test_r2]).transpose()
+rf_results.columns = ['Method','Training MSE','Training R2','Test MSE','Test R2']
+
+print (rf_results)
