@@ -38,7 +38,7 @@ lr_test_r2 = r2_score(Y_test, Y_lr_test_pred)
 lr_results = pd.DataFrame(['Linear regression',lr_train_mse, lr_train_r2, lr_test_mse, lr_test_r2]).transpose()
 lr_results.columns = ['Method','Training MSE','Training R2','Test MSE','Test R2']
 
-print(lr_results)
+#print(lr_results)
 
 #Visualising through a Graph
 
@@ -51,7 +51,7 @@ p = np.poly1d(z)
 plt.plot(Y_train,p(Y_train),"#F8766D")
 plt.ylabel('Predicted LogS')
 plt.xlabel('Experimental LogS')
-plt.show()
+
 
 #Using RandomForest
 
@@ -74,8 +74,38 @@ rf_test_r2 = r2_score(Y_test, Y_rf_test_pred)
 rf_results = pd.DataFrame(['Random forest',rf_train_mse, rf_train_r2, rf_test_mse, rf_test_r2]).transpose()
 rf_results.columns = ['Method','Training MSE','Training R2','Test MSE','Test R2']
 
-print (rf_results)
+#print (rf_results)
 
 #Combining the Results of Linear Regression and Random Forest
 
-pd.concat([lr_results, rf_results])
+print(pd.concat([lr_results, rf_results]))
+
+#Using a Regressor
+
+from sklearn.tree import ExtraTreeRegressor
+et = ExtraTreeRegressor(random_state=42)
+et.fit(X_train, Y_train)
+
+#predict
+Y_etr_train_pred = et.predict(X_train)
+Y_etr_test_pred = et.predict(X_test)
+
+#perfomance metrics
+
+etr_train_mse = mean_squared_error(Y_train, Y_rf_train_pred)
+etr_train_r2 = r2_score(Y_train, Y_rf_train_pred)
+etr_test_mse = mean_squared_error(Y_test, Y_rf_test_pred)
+etr_test_r2 = r2_score(Y_test, Y_rf_test_pred)
+
+etr_results = pd.DataFrame(['Extra Tree Regressor',etr_train_mse, etr_train_r2, etr_test_mse, etr_test_r2]).transpose()
+etr_results.columns = ['Method','Training MSE','Training R2','Test MSE','Test R2']
+
+etr_results = pd.DataFrame(['Extra Tree Regressor',etr_train_mse, etr_train_r2, etr_test_mse, etr_test_r2]).transpose()
+etr_results.columns = ['Method','Training MSE','Training R2','Test MSE','Test R2']
+
+
+
+
+print(etr_results)
+
+
