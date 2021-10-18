@@ -74,11 +74,9 @@ rf_test_r2 = r2_score(Y_test, Y_rf_test_pred)
 rf_results = pd.DataFrame(['Random forest',rf_train_mse, rf_train_r2, rf_test_mse, rf_test_r2]).transpose()
 rf_results.columns = ['Method','Training MSE','Training R2','Test MSE','Test R2']
 
-#print (rf_results)
 
-#Combining the Results of Linear Regression and Random Forest
 
-print(pd.concat([lr_results, rf_results]))
+
 
 #Using a Regressor
 
@@ -103,9 +101,11 @@ etr_results.columns = ['Method','Training MSE','Training R2','Test MSE','Test R2
 etr_results = pd.DataFrame(['Extra Tree Regressor',etr_train_mse, etr_train_r2, etr_test_mse, etr_test_r2]).transpose()
 etr_results.columns = ['Method','Training MSE','Training R2','Test MSE','Test R2']
 
+#Combining the results of Linear Regression, RandomForest and ExtraTreeRegressor
+
+print(pd.concat([lr_results, rf_results,etr_results]))
 
 
 
-print(etr_results)
 
 
